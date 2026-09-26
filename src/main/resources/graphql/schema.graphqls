@@ -4,6 +4,7 @@ type Query {
     accountsList: [BankAccount]
     bankAccountById(id: String): BankAccount
 }
+
 #BankAccount est un type donc il faut le déclarer dans le schema
 type BankAccount {
     id: String,
