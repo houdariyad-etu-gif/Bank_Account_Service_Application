@@ -1,0 +1,13 @@
+type Query {
+    #BankAccount est entre crochets car c est un type de retour qui est une liste car il y a pls accounts
+    #GET ACCOUNTS
+    accountsList: [BankAccount]
+}
+#BankAccount est un type donc il faut le déclarer dans le schema
+type BankAccount {
+    id: String,
+    createdAt: Float,
+    balance: Float,
+    currency: String,
+    type : String
+}
