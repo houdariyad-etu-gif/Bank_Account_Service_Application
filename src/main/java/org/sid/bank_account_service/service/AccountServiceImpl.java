@@ -20,7 +20,7 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountMapper accountMapper;
     @Override
-    //mapping <- fait partie des bonnes pratiques [des entités vers DTO]
+    //mapping <- Le mapping fait partie des bonnes pratiques [des entités vers DTO]
     public BankAccountResponseDTO addAccount(BankAccountRequestDTO bankAccountDTO) {
         BankAccount bankAccount= BankAccount.builder()
             .id (UUID.randomUUID().toString())
