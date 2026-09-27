@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import org.sid.bank_account_service.dto.BankAccountRequestDTO;
 import org.sid.bank_account_service.dto.BankAccountResponseDTO;
 import org.sid.bank_account_service.entities.BankAccount;
+import org.sid.bank_account_service.entities.Customer;
 import org.sid.bank_account_service.repositories.BankAccountRepository;
+import org.sid.bank_account_service.repositories.CustomerRepository;
 import org.sid.bank_account_service.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -22,6 +24,9 @@ public class BankAccountGraphQLController {
     private BankAccountRepository bankAccountRepository;
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private CustomerRepository customerRepository;
+
     //annotation @QueryMapping <- pour dire que c'est une methode qui va traiter une requette GraphQL
     @QueryMapping
     //quand on a une requette ou le client demande accountsList on va executer la methode accountsList
@@ -37,6 +42,21 @@ public class BankAccountGraphQLController {
     @MutationMapping
     public BankAccountResponseDTO addAccount(@Argument BankAccountRequestDTO bankAccount) {
         return accountService.addAccount(bankAccount);
+    }
+
+    @MutationMapping
+    public BankAccountResponseDTO updateAccount(@Argument String id ,@Argument BankAccountRequestDTO bankAccount) {
+        return accountService.updateAccount(id, bankAccount);
+    }
+
+    @MutationMapping
+    public Boolean deleteAccount(@Argument String id) {
+        bankAccountRepository.deleteById(id);
+        return true;
+    }
+    @QueryMapping
+    public List<Customer> customers() {
+        return customerRepository.findAll();
     }
 }
 

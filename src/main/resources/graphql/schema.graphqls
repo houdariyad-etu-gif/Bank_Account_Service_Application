@@ -3,6 +3,7 @@ type Query {
     #GET ACCOUNTS
     accountsList: [BankAccount]
     bankAccountById(id: String): BankAccount
+    customers : [Customer]
 }
 
 #BankAccount est un type donc il faut le déclarer dans le schema
@@ -12,12 +13,20 @@ type BankAccount {
     balance: Float,
     currency: String,
     type : String
+    customer: Customer
 }
 
 type Mutation {
     addAccount(bankAccount: BankAccountDTO): BankAccount
+    updateAccount(id: String, bankAccount: BankAccountDTO): BankAccount
+    deleteAccount(id: String): Boolean
 }
 
+type Customer {
+    id: ID,
+    name: String,
+    bankAccounts: [BankAccount]
+}
 input BankAccountDTO {
     balance: Float,
     currency: String,
